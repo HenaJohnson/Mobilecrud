@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1 class="text-center"><u>Mobile Store</u></h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="brand">
+    <button type="submit">Search</button>
+    <a href="{% url 'add' %}">ADD</a>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Brand</th>
+        <th>Models</th>
+        <th>Color</th>
+        <th>Price</th>
+        <th>Year</th>
+        <th>View</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    <tr>
+        {% for i in result %}
+        <td>{{i.brand}}</td>
+        <td>{{i.modls}}</td>
+        <td>{{i.color}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i.year}}</td>
+        <td><a href="{% url 'mobile' i.id %}">view</td>
+        <td><a href="{% url 'del' i.id %}">Delete</a></td>
+        <td><a href="{% url 'edit' i.id %}">update</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
